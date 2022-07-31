@@ -1,0 +1,57 @@
+{% extends 'app/index.html' %}
+{% block title %}All Post{% endblock %}
+{% block content %}
+       <!-- Main Content-->
+       <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- Post preview-->
+                <div class="post-preview">
+                    {% for post in page_obj.object_list %}
+
+                    <a href="/post_details/{{post.slug}}">
+                        <hr>
+                        <h2 class="post-title" href="{{post.slug}}">{{post.title}}</h2>
+                        <h3 class="post-subtitle">{{post.body}}</h3>
+                        <p class="post-meta">Posted by<a href=""> {{post.author}} </a> on {{post.publish}} </p>
+                        <a href="{% url 'post_share' post.id %}">
+                            <input class="btn-success" type="submit" value="Share Post">
+                        </a>
+                       
+                        <a href="{% url 'comments' post.id %}"><button type="submit" class="btn-primary" >Add Comment</button></a>
+                       
+
+                        {% with comment.count as total_comments %}
+                            <h5>
+                                {{total_comments}} comment {{total_comments | pluralize}}
+                                
+                            </h5>
+                        {% endwith %}         
+                        {% if comment %}
+                        <div class="comment">
+                           <p>{{comment.name}}</p>
+                            {{comment.body | linebreaks }}
+                        </div>
+                     {% else %}
+                        <p>There is not comment yet.</p>
+                     {% endif %}
+                    {% endfor %}   
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container"
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+        {% endif %}
+       
+        {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link text-primary" href="?page={{page_obj.next_page_number}}">Next</a></li>
+        {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

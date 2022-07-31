@@ -1,0 +1,47 @@
+{% extends 'app/index.html' %}
+{% block content %}
+
+<div class="container">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-group col-sm-6">
+          <label for="">Title </label>
+          <input type="text" class="form-control" id="" aria-describedby="emailHelp" placeholder="Title" name='title'>
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="">Author</label>
+            <input type="text" class="form-control" id="" aria-describedby="emailHelp" placeholder="Author" name='author'>
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="">Body</label>
+            <input type="textbox" class="form-control" id="" aria-describedby="emailHelp" placeholder="Body" name='body'>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Post</button>
+        <br>
+      </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
